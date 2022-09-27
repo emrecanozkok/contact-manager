@@ -1,0 +1,22 @@
+<?php
+
+namespace App\Http\Controllers\Api\Auth;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
+class AuthController extends Controller
+{
+    public function login(Request $request)
+    {
+        if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
+
+            $token = auth()->user()->createToken('Contacts')->accessToken;
+            return response(['user' => auth()->user(), 'token' => $token]);
+        }
+        else{
+            return response()->json(['error'=>'Unauthorised']);
+        }
+    }
+}
