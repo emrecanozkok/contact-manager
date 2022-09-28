@@ -5,8 +5,16 @@ use Illuminate\Support\Facades\DB;
 
 class TopPhonesQuery
 {
+
+    /**
+     * @return array
+     */
     public function __invoke()
     {
+        /*
+         * TODO: eloquent ile çözümüne bakılacak
+         */
+
         return DB::select(DB::raw("select
         t.information_content as location
         ,count(t.contact_id) as total
@@ -14,7 +22,6 @@ class TopPhonesQuery
         select distinct
         c.contact_id
         ,c.information_content
-
         from contact_informations c
         inner join contacts c2 on c2.id = c.contact_id
         where c.information_type='LOCATION') t

@@ -1,12 +1,20 @@
 <?php
+
 namespace App\Queries;
 
 use Illuminate\Support\Facades\DB;
 
 class TopContactsQuery
 {
+    /**
+     * @return array
+     */
     public function __invoke()
     {
+        /*
+         * TODO: eloquent ile çözümüne bakılacak
+         */
+
         return DB::select(DB::raw("select
         t.information_content as location
         ,count(t.contact_id) as total

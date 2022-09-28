@@ -10,6 +10,7 @@ use App\Http\Requests\ContactUpdateRequest;
 use App\Http\Resources\ContactCollectionResource;
 use App\Http\Resources\ContactResource;
 use App\Services\ContactService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 
 class ContactController extends Controller
@@ -45,11 +46,11 @@ class ContactController extends Controller
 
     /**
      * @param ContactCreateRequest $request
-     * @return ContactResource
+     * @return JsonResponse
      */
-    public function store(ContactCreateRequest $request): ContactResource
+    public function store(ContactCreateRequest $request): JsonResponse
     {
-        return new ContactResource($this->contactService->save($request->all()));
+        return (new ContactResource($this->contactService->save($request->all())))->response()->setStatusCode(201);
     }
 
     /**

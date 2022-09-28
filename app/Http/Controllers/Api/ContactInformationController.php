@@ -8,6 +8,7 @@ use App\Http\Requests\ContactInformationCreateRequest;
 use App\Http\Resources\ContactInformationResource;
 use App\Services\ContactInformationService;
 use http\Client\Response;
+use Illuminate\Http\JsonResponse;
 
 
 class ContactInformationController extends Controller
@@ -25,16 +26,15 @@ class ContactInformationController extends Controller
 
     /**
      * @param ContactInformationCreateRequest $request
-     * @return ContactInformationResource
+     * @return JsonResponse
      */
-    public function store(ContactInformationCreateRequest $request): ContactInformationResource
+    public function store(ContactInformationCreateRequest $request): JsonResponse
     {
-        return new ContactInformationResource(
+        return (new ContactInformationResource(
             $this->contactInformationService->save(
                 $request->contact,
                 $request->all()
-            )
-        );
+            )))->response()->setStatusCode(201);
     }
 
     /**
