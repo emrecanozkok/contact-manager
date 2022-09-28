@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,11 +13,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        // Here we are creating a collection of 1 Team models
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        $contacts = \App\Models\Contact::factory()->count(2000)->create();
+
+        $contacts->each(function($contact) {
+            $contactInformations = \App\Models\ContactInformation::factory()->count(10)->make();
+            $contactInformations->each(function($contactInformation) use ($contact) {
+                $contact->informations()->create($contactInformation->toArray());
+            });
+        });
     }
 }

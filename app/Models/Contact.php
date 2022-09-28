@@ -13,14 +13,14 @@ class Contact extends Model
 
     public $incrementing = true;
 
-    protected $keyType='string';
+    protected $keyType = 'int';
 
     protected $casts = [
         'id' => 'string'
     ];
 
     protected $fillable = ['name','last_name','company','photo_url'];
-    
+
     public function informations()
     {
         return $this->hasMany(ContactInformation::class,'contact_id','id');
