@@ -38,3 +38,9 @@ docker-compose exec app bash
 OR
 php artisan test 
 ```
+
+```
+mrcnzkk/php8.1_laravel_runner:latest
+```
+
+is my image, you can build it locally in .docker folder
