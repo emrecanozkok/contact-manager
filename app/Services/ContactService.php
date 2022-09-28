@@ -2,6 +2,7 @@
 namespace App\Services;
 
 use App\Http\Resources\ContactResource;
+use App\Models\Contact;
 use App\Repositories\ContactRepository;
 use App\Repositories\Contracts\ContactRepositoryInterface;
 use http\Client\Response;
@@ -9,9 +10,7 @@ use Illuminate\Database\Eloquent\Collection;
 
 class ContactService
 {
-    /**
-     * @var ContactRepository
-     */
+
     private ContactRepository $contactRepository;
 
     /**
@@ -22,27 +21,55 @@ class ContactService
         $this->contactRepository = $contactRepository;
     }
 
+    /**
+     * @param array $data
+     * @return \App\Models\Contact
+     */
     public function save(array $data){
         return $this->contactRepository->save($data);
     }
 
-    public function destroy(string $id){
+    /**
+     * @param string $id
+     * @return int
+     */
+    public function destroy(string $id): int
+    {
         return $this->contactRepository->destroy($id);
     }
 
-    public function get(string $id){
+    /**
+     * @param string $id
+     * @return Contact
+     */
+    public function get(string $id): Contact
+    {
         return $this->contactRepository->getById($id);
     }
 
-    public function update(string $id,$data){
+    /**
+     * @param string $id
+     * @param $data
+     * @return int
+     */
+    public function update(string $id,$data): int
+    {
         return $this->contactRepository->update($id,$data);
     }
 
-    public function getContactsWithInformations(string $id){
+    /**
+     * @param string $id
+     * @return mixed
+     */
+    public function getContactsWithInformations(string $id): mixed
+    {
         return $this->contactRepository->getContactWithInformations($id);
     }
 
-    public function getContacts()
+    /**
+     * @return Collection
+     */
+    public function getContacts(): Collection
     {
         return $this->contactRepository->getContacts();
     }

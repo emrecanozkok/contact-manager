@@ -16,8 +16,7 @@ class ContactInformationRepository implements ContactInformationRepositoryInterf
     public function save($data): Contact
     {
         $contact = new Contact();
-        $status = $contact->create($data);
-        return $status;
+        return $contact->create($data);
     }
 
     /**

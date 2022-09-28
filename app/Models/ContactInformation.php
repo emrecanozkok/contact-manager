@@ -14,17 +14,12 @@ class ContactInformation extends Model
 
     protected $primaryKey = 'id';
 
-    protected $keyType='string';
-
     public $incrementing = true;
 
     protected $casts = [
         'id' => 'string',
-        'contact_id' => 'string',
-        //'information_type' => InformationTypeEnum::class
+        'contact_id' => 'string'
     ];
-
-
 
     protected $fillable = ['information_type','information_content'];
 }

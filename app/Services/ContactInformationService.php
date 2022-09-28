@@ -23,12 +23,21 @@ class ContactInformationService
         $this->contactService = $contactService;
     }
 
+    /**
+     * @param $contactId
+     * @param array $data
+     * @return ContactInformation
+     */
     public function save($contactId, array $data): ContactInformation
     {
         $contact = $this->contactService->get($contactId);
         return $contact->informations()->create($data);
     }
 
+    /**
+     * @param string $informationId
+     * @return int
+     */
     public function destroy(string $informationId): int
     {
         return $this->contactInformationRepository->destroy($informationId);

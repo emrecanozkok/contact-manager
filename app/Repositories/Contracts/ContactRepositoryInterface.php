@@ -11,5 +11,5 @@ interface ContactRepositoryInterface
     public function destroy(string $id) : int;
     public function update(string $id,array $data) : int;
     public function save(array $data) : Contact;
-    public function getContactWithInformations(string $id);
+    public function getContactWithInformations(string $id):mixed;
 }

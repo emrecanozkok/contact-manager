@@ -52,15 +52,15 @@ class ContactRepository implements ContactRepositoryInterface
     public function save(array $data): Contact
     {
         $contact = new Contact();
-        $status = $contact->create($data);
-        return $status;
+        return $contact->create($data);
     }
 
     /**
      * @param string $id
      * @return mixed
      */
-    public function getContactWithInformations (string $id){
+    public function getContactWithInformations (string $id): mixed
+    {
         return Contact::where('id',$id)->with('informations')->get();
     }
 }

@@ -8,50 +8,48 @@ use App\Http\Requests\ContactDeleteRequest;
 use App\Http\Requests\ContactShowRequest;
 use App\Http\Requests\ContactUpdateRequest;
 use App\Http\Resources\ContactCollectionResource;
-use App\Http\Resources\ContactInformationResource;
 use App\Http\Resources\ContactResource;
-use App\Models\Contact;
 use App\Services\ContactService;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use function MongoDB\BSON\toJSON;
 
 class ContactController extends Controller
 {
 
     private ContactService $contactService;
 
+    /**
+     * @param ContactService $contactService
+     */
     public function __construct(ContactService $contactService)
     {
         $this->contactService = $contactService;
     }
 
-
+    /**
+     * @return ContactCollectionResource
+     */
     public function index()
     {
         return new ContactCollectionResource($this->contactService->getContacts());
     }
 
-    public function show(ContactShowRequest $request){
+    /**
+     * @param ContactShowRequest $request
+     * @return ContactResource
+     */
+    public function show(ContactShowRequest $request): ContactResource
+    {
         $contactWithInformations = $this->contactService->getContactsWithInformations($request->contact);
-
         return new ContactResource($contactWithInformations->first());
     }
 
     /**
      * @param ContactCreateRequest $request
-     * @return JsonResponse
+     * @return ContactResource
      */
-    public function store(ContactCreateRequest $request): JsonResponse
+    public function store(ContactCreateRequest $request): ContactResource
     {
-        return response()->json(
-            ContactResource::make(
-                $this->contactService->save(
-                    $request->all()
-                )
-            )
-        );
+        return new ContactResource($this->contactService->save($request->all()));
     }
 
     /**

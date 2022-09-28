@@ -20,8 +20,7 @@ class Contact extends Model
     ];
 
     protected $fillable = ['name','last_name','company','photo_url'];
-
-
+    
     public function informations()
     {
         return $this->hasMany(ContactInformation::class,'contact_id','id');
