@@ -41,7 +41,7 @@ class ContactInformationController extends Controller
      * @param ContactDeleteRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ContactDeleteRequest $request): Response
+    public function destroy(ContactDeleteRequest $request): \Illuminate\Http\Response
     {
         $this->contactInformationService->destroy($request->information);
         return response()->noContent(200);
