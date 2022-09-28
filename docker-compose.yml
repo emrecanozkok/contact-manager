@@ -15,9 +15,10 @@ services:
       - app
 
   app:
-    build:
-      context: ./
-      dockerfile: .docker/app.docker
+    image:  mrcnzkk/php8.1_laravel_runner:latest
+    #build:
+    #  context: ./
+    #  dockerfile: .docker/app.docker
     volumes:
       - ./:/var/www
     links:
