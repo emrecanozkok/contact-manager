@@ -13,7 +13,7 @@ class Contact extends Model
 
     public $incrementing = true;
 
-    protected $keyType = 'int';
+    protected $keyType = 'string';
 
     protected $casts = [
         'id' => 'string'

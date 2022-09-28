@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\ContactController;
 use App\Http\Controllers\Api\ContactInformationController;
+use App\Http\Controllers\Api\ReportController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,4 +22,8 @@ Route::post('auth', [AuthController::class, 'login']);
 Route::middleware('auth:api')->group( function () {
     Route::resource('contacts', ContactController::class)->only(['index','show', 'store', 'update', 'destroy']);;
     Route::resource('contacts/{contact}/informations', ContactInformationController::class)->only(['store','destroy']);
+
+    Route::get('reports/toplocations',[ReportController::class,'topLocations']);
+    Route::get('reports/topcontacts',[ReportController::class,'topContacts']);
+    Route::get('reports/topphones',[ReportController::class,'topPhones']);
 });
